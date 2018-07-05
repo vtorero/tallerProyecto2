@@ -38,7 +38,7 @@ namespace WebApiMovil.Controllers
 
         [HttpPost]
         [ActionName("BuscarProyectoName")]
-        public Proyecto BuscarProyectoName(Proyecto entidad)
+        public List<Proyecto> BuscarProyectoName(Proyecto entidad)
         {
             try
             {

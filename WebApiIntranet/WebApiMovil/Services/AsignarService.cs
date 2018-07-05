@@ -74,7 +74,7 @@ namespace WebApiMovil.Services
             }
         }
 
-        public Proyecto BuscarProyectos(Proyecto entidad)
+        public List<Proyecto> BuscarProyectos(Proyecto entidad)
         {
             try
             {

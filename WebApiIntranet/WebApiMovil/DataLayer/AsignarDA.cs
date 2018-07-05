@@ -207,8 +207,9 @@ namespace WebApiMovil.DataLayer
             }
         }
 
-        public Proyecto ObtenerProyectoName(Proyecto proyecto)
+        public List<Proyecto> ObtenerProyectoName(Proyecto proyecto)
         {
+            List<Proyecto> Lista = null;
             try
             {
                 using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
@@ -227,26 +228,27 @@ namespace WebApiMovil.DataLayer
                         {
                             if (dr.HasRows)
                             {
+                                Lista = new List<Proyecto>();
                                 while (dr.Read())
                                 {
-                                    
+                                    Proyecto entidad = new Proyecto();
                                     if (!dr.IsDBNull(dr.GetOrdinal("codProyecto")))
-                                        proyecto.codProyecto = dr.GetInt32(dr.GetOrdinal("codProyecto"));
+                                        entidad.codProyecto = dr.GetInt32(dr.GetOrdinal("codProyecto"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("nombreProyecto")))
-                                        proyecto.nombreProyecto = dr.GetString(dr.GetOrdinal("nombreProyecto"));
+                                        entidad.nombreProyecto = dr.GetString(dr.GetOrdinal("nombreProyecto"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("fechaInicio")))
-                                        proyecto.fechaInicio = dr.GetDateTime(dr.GetOrdinal("fechaInicio"));
+                                        entidad.fechaInicio = dr.GetDateTime(dr.GetOrdinal("fechaInicio"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("fechaFin")))
-                                        proyecto.fechaFin = dr.GetDateTime(dr.GetOrdinal("fechaFin"));
+                                        entidad.fechaFin = dr.GetDateTime(dr.GetOrdinal("fechaFin"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("estado")))
-                                        proyecto.estado = dr.GetString(dr.GetOrdinal("estado"));
+                                        entidad.estado = dr.GetString(dr.GetOrdinal("estado"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("fechaCreacion")))
-                                        proyecto.fechaCreacion = dr.GetDateTime(dr.GetOrdinal("fechaCreacion"));
+                                        entidad.fechaCreacion = dr.GetDateTime(dr.GetOrdinal("fechaCreacion"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("usuarioCreacion")))
-                                        proyecto.usuarioCreacion = dr.GetString(dr.GetOrdinal("usuarioCreacion"));
+                                        entidad.usuarioCreacion = dr.GetString(dr.GetOrdinal("usuarioCreacion"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("jefeProyecto")))
-                                        proyecto.jefeProyecto= dr.GetString(dr.GetOrdinal("jefeProyecto"));
-
+                                        entidad.jefeProyecto= dr.GetString(dr.GetOrdinal("jefeProyecto"));
+                                    Lista.Add(entidad);
                                 }
                             }
                             else
@@ -257,7 +259,7 @@ namespace WebApiMovil.DataLayer
                     }
                     conection.Close();
                 }
-                return proyecto;
+                return Lista;
             }
             catch (Exception ex)
             {

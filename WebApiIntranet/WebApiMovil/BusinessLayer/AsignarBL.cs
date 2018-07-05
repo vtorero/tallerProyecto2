@@ -87,7 +87,7 @@ namespace WebApiMovil.BusinessLayer
             }
         }
 
-        public Proyecto obtenerProyecto(Proyecto entidad)
+        public List<Proyecto> obtenerProyecto(Proyecto entidad)
         {
             try
             {

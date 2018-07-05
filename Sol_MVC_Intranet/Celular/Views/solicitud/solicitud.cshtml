@@ -43,13 +43,13 @@
             <div class="card-body">
                 <label>Operaciones</label>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-primary  btn-sm">Aceptar Solicitud</button>
+                    <button type="button" class="btn btn-block btn-primary  btn-sm" onclick="javascript:btnGrabar('Aceptar')">Aceptar Solicitud</button>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-danger btn-sm">Rechazar Solicitud</button>
+                    <button type="button" class="btn btn-block btn-danger btn-sm" onclick="javascript:btnGrabar('Rechazar')">Rechazar Solicitud</button>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-success btn-sm">Solo Grabar</button>
+                    <button type="button" class="btn btn-block btn-success btn-sm" onclick="javascript:btnGrabar('Grabar')">Solo Grabar</button>
                 </div>
             </div>
         </div>
@@ -348,12 +348,12 @@
             "async": false,
             success: function (data) {
                   console.log(data);
-                    var fecha_creacion = new Date(data.fechaCreacion);
-                    var fecha_inicio = new Date(data.fechaInicio);
-                    var fecha_fin = new Date(data.fechaFin);
-                $("#nombreProyecto").val(data.nombreProyecto);
-                $("#jefeProyecto").val(data.jefeProyecto);
-                $("#usuarioCreacion").val(data.usuarioCreacion);
+                    var fecha_creacion = new Date(data[0].fechaCreacion);
+                var fecha_inicio = new Date(data[0].fechaInicio);
+                var fecha_fin = new Date(data[0].fechaFin);
+                $("#nombreProyecto").val(data[0].nombreProyecto);
+                $("#jefeProyecto").val(data[0].jefeProyecto);
+                $("#usuarioCreacion").val(data[0].usuarioCreacion);
                 $("#fechaSolicitud").val(fecha_creacion.toLocaleDateString());
                 $("#fechaInicio").val(fecha_inicio.toLocaleDateString());
                 $("#fechaFin").val(fecha_fin.toLocaleDateString());
@@ -494,7 +494,7 @@
                   
                     var fecha_inicio = new Date(data[i].fechaInicio);
                     var fecha_fin = new Date(data[i].fechaFin);
-                    output += '<tr><td>' + data[i].descripcion + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td>' + data[i].porcentajePlan + '</td><td>' + data[i].porcentajeReal + '</td><td align="center"><a href="retirar/index/' + data[i].codEmpleado + '">Retirar</a></td></tr>';
+                    output += '<tr><td>' + data[i].descripcion + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td>' + data[i].porcentajePlan + '</td><td>' + data[i].porcentajeReal + '</td><td align="center"><a class="eliminar" href="#" data-id="' + data[i].idActividad + '">Retirar</a></td></tr>';
                     //console.log(data[i].DEPA_DESCRIPCION);
 
                 }
@@ -545,4 +545,31 @@
     });
     llenarTablaProgramador();
     llenarTablaActividades();
+
+    $('.eliminar').click(function (e) {
+        var bool = window.confirm("Seguro de eliminar el Recurso?");
+        if (bool) {
+
+
+            alert("se eliminó correctamente");
+        } else {
+            alert("canceló la solicitud");
+        }
+       
+    });
+
+    function btnGrabar(e) {
+        
+        var inps = $("#codigoInspector").val();
+        var coor = $("#codigoCoordinador").val();
+        var estado = e;
+        entidad = {};
+        entidad.idProyecto =@ViewBag.idProyecto;
+        entidad.idInspector = inps;
+        entidad.idCoordinador = coor;
+        entidad.estado = e;
+        entidad.Observacion = e;
+        console.log(entidad);
+
+    }
 </script>

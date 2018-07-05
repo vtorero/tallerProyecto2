@@ -32,23 +32,23 @@ $("#btnBuscar").click(function () {
                 output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
                 output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha solicitud</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
                 console.log("datax", data);
-                //    for (const i in data) {
+                    for (const i in data) {
                 //console.log(data.codProyecto);
                 if (data.estado == "0: Registros encontrados") {
                     output += '<tr><td colspan="7" align="center">' + data.estado + '</td></tr>';
                 }
                 else {
 
-                    var fecha_creacion = new Date(data.fechaCreacion);
-                    var fecha_inicio = new Date(data.fechaInicio);
-                    var fecha_fin = new Date(data.fechaFin);
+                    var fecha_creacion = new Date(data[i].fechaCreacion);
+                    var fecha_inicio = new Date(data[i].fechaInicio);
+                    var fecha_fin = new Date(data[i].fechaFin);
 
-                    output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data.estado + '</td><td><a href="solicitud/index/' + data.codProyecto +'">Seleccionar</a></td></tr>';
+                    output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto +'">Seleccionar</a></td></tr>';
                 }
                     //console.log(data[i].DEPA_DESCRIPCION);
+               
+                  }
                 output += '</table>';
-                //  }
-
                 $('#resultado').html(output);
 
             }
@@ -62,26 +62,26 @@ function llenarTabla2() {
         url: 'http://localhost:9586/api/Asignar/ListadoProyectos',
         dataType: 'json',
         async: false,
-        success: function (data)
-        {
+        success: function (data) {
             output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
             output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha solicitud</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
-          
-            
+
+            var  total = 0;
             console.log("datax", data);
             for (var i in data) {
+                total++;
                 console.log(i);
                 var fecha_creacion = new Date(data[i].fechaCreacion);
                 var fecha_inicio = new Date(data[i].fechaInicio);
                 var fecha_fin = new Date(data[i].fechaFin);
-                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto +'">Seleccionar</a></td></tr>';
+                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto + '">Seleccionar</a></td></tr>';
                 //console.log(data[i].DEPA_DESCRIPCION);
 
             }
-            $('#resultado').html(output);
-
             
 
+            output +='</table><br><b>Total Registros encontrados: ' + total + '</b>';
+            $('#resultado').html(output);
 
         }
     });
