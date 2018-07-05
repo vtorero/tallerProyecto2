@@ -26,6 +26,18 @@ namespace WebApiMovil.Services
                 throw;
             }
         }
+        public List<Actividad> ListaActividad(Proyecto entidad)
+        {
+            try
+            {
+                return asignarBL.ListadoAtividad(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<Empleado> BuscarRecurso(Empleado entidad)
         {
             try
@@ -37,6 +49,18 @@ namespace WebApiMovil.Services
                 throw;
             }
         }
+        public Actividad ActividadCRUD(Actividad entidad)
+        {
+            try
+            {
+                return asignarBL.actividadCRUD(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
         public Recurso RecursoCRUD(Recurso entidad)
         {

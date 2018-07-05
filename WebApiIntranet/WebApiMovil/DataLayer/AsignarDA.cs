@@ -12,6 +12,62 @@ namespace WebApiMovil.DataLayer
     public class AsignarDA
     {
 
+        public Actividad ActividadCRUD(Actividad entidad)
+        {
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
+                {
+                    conection.Open();
+
+                    using (SqlCommand command = new SqlCommand("SP_INSERT_ACTIVIDAD", conection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@id_proyecto", entidad.idProyecto);
+                        command.Parameters.AddWithValue("@fechaInicio", entidad.fechaInicio);
+                        command.Parameters.AddWithValue("@fechaFin", entidad.fechaFin);
+                        command.Parameters.AddWithValue("@descripcion", entidad.descripcion);
+                        command.Parameters.AddWithValue("@preal", entidad.porcentajeReal);
+                        command.Parameters.AddWithValue("@pplan", entidad.porcentajePlan);
+                        command.Parameters.AddWithValue("@est", entidad.estado);
+
+
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idProyecto")))
+                                        entidad.idProyecto = dr.GetInt32(dr.GetOrdinal("idProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("fechaInicio")))
+                                        entidad.fechaInicio = dr.GetDateTime(dr.GetOrdinal("fechaInicio"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("fechaFin")))
+                                        entidad.fechaFin = dr.GetDateTime(dr.GetOrdinal("fechaFin"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("Descripcion")))
+                                        entidad.descripcion = dr.GetString(dr.GetOrdinal("Descripcion"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("porcentajeReal")))
+                                        entidad.porcentajeReal = dr.GetInt32(dr.GetOrdinal("porcentajeReal"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("porcentajePlan")))
+                                        entidad.porcentajeReal = dr.GetInt32(dr.GetOrdinal("porcentajePlan"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("estado")))
+                                        entidad.estado = dr.GetString(dr.GetOrdinal("estado"));
+                                }
+                            }
+                        }
+                    }
+                    conection.Close();
+                }
+                return entidad;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public Recurso RecursoCRUD(Recurso entidad)
         {
             try
@@ -209,6 +265,61 @@ namespace WebApiMovil.DataLayer
             }
         }
 
+        public List<Actividad> ListadoAtividad(Proyecto entidad)
+        {
+            List<Actividad> Lista = null;
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
+                {
+                    conection.Open();
+                    using (SqlCommand command = new SqlCommand("SP_OBTENER_ACTIVIDADES", conection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@idproyecto ", entidad.codProyecto);
+                        
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                Lista = new List<Actividad>();
+                                while (dr.Read())
+                                {
+                                    Actividad ObjEnt = new Actividad();
+                                    ObjEnt.idActividad = dr.GetInt32(dr.GetOrdinal("idActividad"));
+                                    ObjEnt.descripcion = dr.GetString(dr.GetOrdinal("Descripcion"));
+                                    ObjEnt.fechaInicio = dr.GetDateTime(dr.GetOrdinal("fechaInicio"));
+                                    ObjEnt.fechaFin = dr.GetDateTime(dr.GetOrdinal("fechaFin"));
+                                    ObjEnt.porcentajeReal = dr.GetInt32(dr.GetOrdinal("porcentajeReal"));
+                                    ObjEnt.porcentajePlan = dr.GetInt32(dr.GetOrdinal("porcentajePlan"));
+                                    ObjEnt.estado = dr.GetString(dr.GetOrdinal("estado"));
+                                    
+
+
+                                    Lista.Add(ObjEnt);
+
+                                }
+
+                            }
+                            else
+                            {
+                                Lista = new List<Actividad>();
+                                Actividad asignacion = new Actividad();
+                                asignacion.idActividad = 0;
+                                Lista.Add(asignacion);
+                            }
+                        }
+
+                    }
+                    conection.Close();
+                }
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
 
         public List<Empleado> ListadoEmpleados(Empleado  entidad)
         {

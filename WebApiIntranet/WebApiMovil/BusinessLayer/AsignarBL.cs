@@ -16,6 +16,17 @@ namespace WebApiMovil.BusinessLayer
             asignarDA = new AsignarDA();
         }
 
+        public Actividad actividadCRUD(Actividad entidad)
+        {
+            try
+            {
+                return asignarDA.ActividadCRUD(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public Recurso RecursoCRUD(Recurso entidad)
         {
             try
@@ -39,7 +50,19 @@ namespace WebApiMovil.BusinessLayer
                 throw;
             }
         }
+        
 
+             public List<Actividad> ListadoAtividad(Proyecto entidad)
+        {
+            try
+            {
+                return asignarDA.ListadoAtividad(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public List<Empleado> ListadoEmpleados(Empleado entidad)
         {
             try

@@ -50,6 +50,20 @@ namespace WebApiMovil.Controllers
             }
         }
         [HttpPost]
+        [ActionName("ActividadCRUD")]
+        public Actividad ActividadCRUD(Actividad entidad)
+        {
+            try
+            {
+                return asignarService.ActividadCRUD(entidad);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
         [ActionName("RecursoCRUD")]
         public Recurso RecursoCRUD(Recurso entidad)
         {
@@ -62,6 +76,21 @@ namespace WebApiMovil.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [ActionName("ListadoActividad")]
+        public List<Actividad> ListadoActividad(Proyecto entidad)
+        {
+            try
+            {
+                return asignarService.ListaActividad(entidad);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         [HttpPost]
         [ActionName("ListadoProgramador")]

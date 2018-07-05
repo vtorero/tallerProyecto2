@@ -158,8 +158,22 @@
                 <h3 class="card-title">Seleccionar Programador</h3>
             </div>
             <div class="card-body">
-                <div id="tablaProgramador"></div>
                 <button type="button" class="btn  btn-secondary  btn-sm" data-cargo="Programador" data-toggle="modal" data-target="#exampleModal3">Agregar...</button>
+                <div id="tablaProgramador"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Cronograma</h3>
+            </div>
+            <div class="card-body">
+                <div id="tablaActividades"></div>
+                <button type="button" class="btn  btn-secondary  btn-sm" data-cargo="Programador" data-toggle="modal" data-target="#exampleModal4">Agregar...</button>
             </div>
         </div>
     </div>
@@ -257,6 +271,67 @@
         </div>
     </div>
 </div>
+
+<!--cronograma  modal-->
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Actividad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" id="id">
+                        <input type="text" class="form-control" placeholder="Actividad" id="txtActividad">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Fechas</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" placeholder="yyyy-mm-dd" data-mask="" type="text" id="inicioActividad">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <!-- /.form group -->
+                    <!-- Date mm/dd/yyyy -->
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" placeholder="yyyy-mm-dd" data-mask="" type="text" id="finActividad">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="input-group-prepend">
+                            <input class="form-control" placeholder="Porcentaje Plan" type="text" id="planActividad">
+                        </div>
+                        <div class="input-group-prepend">
+                            <input class="form-control" placeholder="Porcentaje Avance" type="text" id="realActividad">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btnGrabarActividad" data-dismiss="modal" data-cargo="Coordinador">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="~/Content/plugins/jquery/jquery.min.js"></script>
 <script>
 
@@ -384,7 +459,7 @@
                 console.log("datax", data);
                 for (var i in data) {
                    
-                    output += '<tr><th scope="row">' + data[i].cargo + '</th><td>' + data[i].Nombres + '</td><td>' +  data[i].Apellidos +  '</td><td><a href="retirar/index/' + data[i].codEmpleado + '">Retirar</a></td></tr>';
+                    output += '<tr><td>' + data[i].cargo + '</td><td>' + data[i].Nombres + '</td><td>' +  data[i].Apellidos +  '</td><td align="center"><a href="retirar/index/' + data[i].codEmpleado + '">Retirar</a></td></tr>';
                     //console.log(data[i].DEPA_DESCRIPCION);
 
                 }
@@ -399,5 +474,75 @@
         
 
     }
+
+    function llenarTablaActividades() {
+        var entidad = {};
+        entidad.codProyecto = @ViewBag.idProyecto;;
+        $.ajax({
+            data: entidad,
+            type: 'POST',
+            url: 'http://localhost:9586/api/Asignar/ListadoActividad',
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
+                output += '<thead><tr><th>Descripción</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Estado</th><th>% Plan</th><th>% Real</th><th>Operaciones</th></tr></thead><tbody>';
+
+
+                console.log("datax", data);
+                for (var i in data) {
+                  
+                    var fecha_inicio = new Date(data[i].fechaInicio);
+                    var fecha_fin = new Date(data[i].fechaFin);
+                    output += '<tr><td>' + data[i].descripcion + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td>' + data[i].porcentajePlan + '</td><td>' + data[i].porcentajeReal + '</td><td align="center"><a href="retirar/index/' + data[i].codEmpleado + '">Retirar</a></td></tr>';
+                    //console.log(data[i].DEPA_DESCRIPCION);
+
+                }
+                $('#tablaActividades').html(output);
+
+
+
+
+            }
+        });
+
+        
+
+    }
+
+
+    $(".btnGrabarActividad").click(function () {
+        var codigo = $("input[name=blankRadioProgramador]:checked").val();
+  
+        var entidad = {};
+   
+    
+        entidad.idProyecto = @ViewBag.idProyecto;
+        entidad.fechaFin = $("#finActividad").val();
+        entidad.fechaInicio = $("#inicioActividad").val();
+        entidad.descripcion = $("#txtActividad").val();
+        entidad.porcentajeReal = $("#realActividad").val();
+        entidad.porcentajePlan = $("#planActividad").val();
+        entidad.estado = 'Nuevo';
+        console.log(entidad);           
+    
+        $.ajax({
+            "data": entidad,
+            "url": 'http://localhost:9586/api/Asignar/ActividadCRUD',
+            "dataType": "json",
+            "type": "POST",
+            "cache": false,
+            "async": false,
+            success: function (data) {
+                console.log("Actividad",data);
+              
+                llenarTablaActividades();
+                   
+
+            }
+        });
+
+    });
     llenarTablaProgramador();
+    llenarTablaActividades();
 </script>
