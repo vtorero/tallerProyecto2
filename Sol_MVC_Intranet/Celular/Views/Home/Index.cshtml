@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Buscar solicitudes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Solcitudes</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <input class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" placeholder="Fecha inicio dd/mm/aaaa">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <input class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" placeholder="Fecha Fin dd/mm/aaaa">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            
+                                <select class="form-control" placeholder="Estado" id="txtestado">
+                                    <option value="0">*Estado*</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Rechazado">Rechazado</option>
+                                    <option value="Proceso">en Proceso</option>
+                                    <option value="Realizado">Realizado</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Proyecto" id="txtProyecto">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button id="btnBuscar" type="button" class="btn btn-primary">Buscar Solicitudes</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="resultado">
+                        </div>
+                       </div>
+                    </div>
+                <!-- /.card-body -->
+            </form>
+        </div>
+        <!--card-->
+    </div>
+
+    <!--/.col (left) -->
+    <!-- right column -->
+    <!--/.col (right) -->
+</div>
+
