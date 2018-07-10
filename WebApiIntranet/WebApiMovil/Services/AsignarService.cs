@@ -61,6 +61,17 @@ namespace WebApiMovil.Services
             }
         }
 
+        public Solicitud SolicitudCRUD(Solicitud entidad)
+        {
+            try
+            {
+                return asignarBL.SolicitudCRUD(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         public Recurso RecursoCRUD(Recurso entidad)
         {

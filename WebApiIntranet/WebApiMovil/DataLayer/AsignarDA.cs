@@ -11,6 +11,59 @@ namespace WebApiMovil.DataLayer
 {
     public class AsignarDA
     {
+        public Solicitud SolicitudCRUD(Solicitud entidad)
+        {
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
+                {
+                    conection.Open();
+
+                    using (SqlCommand command = new SqlCommand("SP_INSERT_SOLICITUD", conection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@id_proyecto", entidad.idProyecto);
+                        command.Parameters.AddWithValue("@id_coordinador", entidad.idCoordinador);
+                        command.Parameters.AddWithValue("@id_inspector", entidad.idInspector);
+                        command.Parameters.AddWithValue("@observacion", entidad.observacion);
+                        command.Parameters.AddWithValue("@fechaAprobacion", entidad.fechaAprobacion);
+                        command.Parameters.AddWithValue("@estadoSolicitud", entidad.estadoSolicitud);
+                      
+                        
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idProyecto")))
+                                        entidad.idProyecto = dr.GetInt32(dr.GetOrdinal("idProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idCoordinador")))
+                                        entidad.idCoordinador= dr.GetInt32(dr.GetOrdinal("idCoordinador"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idInspector")))
+                                        entidad.idInspector = dr.GetInt32(dr.GetOrdinal("idInspector"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("Observacion")))
+                                        entidad.observacion = dr.GetString(dr.GetOrdinal("Observacion"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("fechaAprobacion")))
+                                        entidad.fechaAprobacion = dr.GetDateTime(dr.GetOrdinal("fechaAprobacion"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("estadoSolicitud")))
+                                        entidad.estadoSolicitud = dr.GetString(dr.GetOrdinal("estadoSolicitud"));
+                                    
+                                }
+                            }
+                        }
+                    }
+                    conection.Close();
+                }
+                return entidad;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         public Actividad ActividadCRUD(Actividad entidad)
         {
@@ -350,6 +403,8 @@ namespace WebApiMovil.DataLayer
                                     ObjEnt.cargo= dr.GetString(dr.GetOrdinal("cargo"));
                                     ObjEnt.dni = dr.GetString(dr.GetOrdinal("dni"));
                                     ObjEnt.tipo = dr.GetString(dr.GetOrdinal("tipo"));
+                                 
+                                  
 
 
                                     Lista.Add(ObjEnt);

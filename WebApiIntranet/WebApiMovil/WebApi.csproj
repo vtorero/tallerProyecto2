@@ -238,6 +238,7 @@
     <Compile Include="Models\Proyecto.cs" />
     <Compile Include="Models\Recurso.cs" />
     <Compile Include="Models\Responsable.cs" />
+    <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Models\Trabajador.cs" />
     <Compile Include="Models\Ubigeo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -18,6 +18,7 @@ $("#btnBuscar").click(function () {
     var est = $('#txtestado').val();
     console.log(proyecto);
     var entidad = {};
+    var total = 0;
     entidad.nombreProyecto = proyecto;
     entidad.estado = est;
             $.ajax({
@@ -28,11 +29,12 @@ $("#btnBuscar").click(function () {
             "cache": false,
             "async": false,
             success: function (data) {
-                console.log("objeto",data.length);
+                //console.log("objeto",data.length);
                 output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
                 output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha solicitud</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
                 console.log("datax", data);
-                    for (const i in data) {
+                for (const i in data) {
+                    total++;
                 //console.log(data.codProyecto);
                 if (data.estado == "0: Registros encontrados") {
                     output += '<tr><td colspan="7" align="center">' + data.estado + '</td></tr>';
@@ -48,7 +50,7 @@ $("#btnBuscar").click(function () {
                     //console.log(data[i].DEPA_DESCRIPCION);
                
                   }
-                output += '</table>';
+                output += '</table><br><b>Total Registros encontrados: ' + total + '</b>';
                 $('#resultado').html(output);
 
             }

@@ -27,6 +27,18 @@ namespace WebApiMovil.BusinessLayer
                 throw;
             }
         }
+
+        public Solicitud SolicitudCRUD(Solicitud entidad)
+        {
+            try
+            {
+                return asignarDA.SolicitudCRUD(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public Recurso RecursoCRUD(Recurso entidad)
         {
             try

@@ -64,6 +64,20 @@ namespace WebApiMovil.Controllers
         }
 
         [HttpPost]
+        [ActionName("SolicitudCRUD")]
+        public Solicitud SolicitudCRUD(Solicitud entidad)
+        {
+            try
+            {
+                return asignarService.SolicitudCRUD(entidad);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
         [ActionName("RecursoCRUD")]
         public Recurso RecursoCRUD(Recurso entidad)
         {

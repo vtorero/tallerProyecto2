@@ -43,13 +43,13 @@
             <div class="card-body">
                 <label>Operaciones</label>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-primary  btn-sm" onclick="javascript:btnGrabar('Aceptar')">Aceptar Solicitud</button>
+                    <button type="button" class="btn btn-block btn-primary btnGrabar btn-sm" data-estado="Aceptada" data-mensaje="Aceptar">Aceptar Solicitud</button>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-danger btn-sm" onclick="javascript:btnGrabar('Rechazar')">Rechazar Solicitud</button>
+                    <button type="button" class="btn btn-block btn-danger btnGrabar btn-sm" data-estado="Rechazada" data-mensaje="Rechazar"> Rechazar Solicitud</button>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-success btn-sm" onclick="javascript:btnGrabar('Grabar')">Solo Grabar</button>
+                    <button type="button" class="btn btn-block btn-success btnGrabar btn-sm" data-estado="Pendiente" data-mensaje="Grabar">Solo Grabar</button>
                 </div>
             </div>
         </div>
@@ -386,7 +386,7 @@
                       for(var i in data) {
                     //console.log(data.codProyecto);
                           if (data[i].idEmpleado == "0") {
-                        output += '<tr><td colspan="4" align="center">No hay coincidencias</td></tr>';
+                        output += '<tr><td colspan="5" align="center">No hay coincidencias</td></tr>';
                     }
                     else {
 
@@ -490,6 +490,7 @@
 
 
                 console.log("datax", data);
+                if (data[0].idActividad != 0) {
                 for (var i in data) {
                   
                     var fecha_inicio = new Date(data[i].fechaInicio);
@@ -497,6 +498,7 @@
                     output += '<tr><td>' + data[i].descripcion + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td>' + data[i].porcentajePlan + '</td><td>' + data[i].porcentajeReal + '</td><td align="center"><a class="eliminar" href="#" data-id="' + data[i].idActividad + '">Retirar</a></td></tr>';
                     //console.log(data[i].DEPA_DESCRIPCION);
 
+                    }
                 }
                 $('#tablaActividades').html(output);
 
@@ -558,18 +560,45 @@
        
     });
 
-    function btnGrabar(e) {
-        
+    $(".btnGrabar").click(function () {
+        mensaje= $(this).data("mensaje");
         var inps = $("#codigoInspector").val();
         var coor = $("#codigoCoordinador").val();
-        var estado = e;
+
+        if (inps == '' || coor == ''){
+            window.confirm("Falta asignar Coordinador o Inspector");
+            return;
+
+    }
         entidad = {};
         entidad.idProyecto =@ViewBag.idProyecto;
         entidad.idInspector = inps;
         entidad.idCoordinador = coor;
-        entidad.estado = e;
-        entidad.Observacion = e;
+        entidad.estadoSolicitud = $(this).data("estado");
+        entidad.Observacion = 'xxxx';
+        entidad.fechaAprobacion = "2018-07-05";
         console.log(entidad);
+        var bool = window.confirm("Esta seguro de " + mensaje+" la solicitud?");
+        if (bool && mensaje != "Rechazar") {
+            $.ajax({
+                "data": entidad,
+                "url": 'http://localhost:9586/api/Asignar/SolicitudCRUD',
+                "dataType": "json",
+                "type": "POST",
+                "cache": false,
+                "async": false,
+                success: function (data) {
+                    console.log("Solicitud", data);
 
-    }
+                }
+            });
+            alert("se " + mensaje + " la solicitud correctamente");
+
+            window.location.href = 'http://localhost:4356/';
+        } else {
+            // alert("canceló la solicitud");
+        }
+
+
+    });
 </script>

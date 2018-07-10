@@ -310,3 +310,4 @@ D:\tp2\WebApiIntranet\WebApiMovil\obj\Debug\WebApi.csproj.CoreCompileInputs.cach
 D:\tp2\WebApiIntranet\WebApiMovil\obj\Debug\WebApi.csproj.CopyComplete
 D:\tp2\WebApiIntranet\WebApiMovil\obj\Debug\WebApiMovil.dll
 D:\tp2\WebApiIntranet\WebApiMovil\obj\Debug\WebApiMovil.pdb
+D:\tp2\WebApiIntranet\WebApiMovil\obj\Debug\WebApi.csprojAssemblyReference.cache

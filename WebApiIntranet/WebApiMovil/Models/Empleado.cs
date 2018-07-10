@@ -30,6 +30,12 @@ namespace WebApiMovil.Models
         [DataMember]
         public string tipo { get; set; }
 
+        [DataMember]
+        public DateTime fechaInicio { get; set; }
+
+        [DataMember]
+        public DateTime fechaFin { get; set; }
+
 
     }
 }
