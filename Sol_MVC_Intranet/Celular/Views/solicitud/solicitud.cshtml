@@ -16,11 +16,11 @@
                     <input class="form-control" disabled="" type="text" id="nombreProyecto">
                 </div>
                 <div class="form-group">
-                    <label>Jefe Proyecto</label>
+                    <label>Jefe  de Proyecto</label>
                     <input class="form-control" disabled="" type="text" id="jefeProyecto">
                 </div>
                 <div class="form-group">
-                    <label>Fecha Solicitud</label>
+                    <label>Fecha de Solicitud</label>
                     <input class="form-control" disabled="" type="text" id="fechaSolicitud">
                 </div>
             </div>
@@ -29,11 +29,11 @@
             <div class="card-body">
                 <!-- text input -->
                 <div class="form-group">
-                    <label>Fecha inicio Proyecto</label>
+                    <label>Fecha inicio de Proyecto</label>
                     <input class="form-control" disabled="" type="text" id="fechaInicio">
                 </div>
                 <div class="form-group">
-                    <label>Fecha Fin proyecto</label>
+                    <label>Fecha de Fin de proyecto</label>
                     <input class="form-control" disabled="" type="text" id="fechaFin">
                 </div>
 
@@ -57,13 +57,13 @@
             <div class="card-body">
                 <!-- text input -->
                 <div class="form-group">
-                    <label>Jefe Inspección</label>
+                    <label>Jefe de Inspección</label>
                     <input class="form-control" disabled="" type="text" value="Juan Ramirez" id="jefeInspeccion">
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label>Usuario creación</label>
                     <input class="form-control" disabled="" type="text" id="usuarioCreacion">
-                </div>
+                </div>-->
 
 
             </div>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-primary  btn-sm" data-toggle="modal" data-target="#exampleModal">Buscar...</button>
+                    <button type="button" class="btn btn-block btn-primary  btn-sm" data-toggle="modal" data-target="#exampleModal">Buscar Coordinador</button>
                 </div><!-- /.input group -->
             </div>
             <!-- /.form group -->
@@ -117,7 +117,7 @@
                 <h3 class="card-title">Seleccionar Inspector</h3>
             </div>
             <div class="card-body">
-                <label>Nombre Coordinador</label>
+                <label>Nombre Inspector</label>
                 <input type="hidden" id="codigoInspector" />
                 <input class="form-control" placeholder="" type="text" id="nombreInspector" disabled="">
                 <div class="form-group">
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-primary  btn-sm" data-toggle="modal" data-target="#exampleModal2">Buscar...</button>
+                    <button type="button" class="btn btn-block btn-primary  btn-sm" data-toggle="modal" data-target="#exampleModal2">Buscar Inspector</button>
 
                 </div><!-- /.input group -->
             </div>
@@ -158,7 +158,7 @@
                 <h3 class="card-title">Seleccionar Programador</h3>
             </div>
             <div class="card-body">
-                <button type="button" class="btn  btn-secondary  btn-sm" data-cargo="Programador" data-toggle="modal" data-target="#exampleModal3">Agregar...</button>
+                <button type="button" class="btn  btn-secondary  btn-sm" data-cargo="Programador" data-toggle="modal" data-target="#exampleModal3">Buscar Programador</button>
                 <div id="tablaProgramador"></div>
 
             </div>
@@ -173,7 +173,7 @@
             </div>
             <div class="card-body">
                 <div id="tablaActividades"></div>
-                <button type="button" class="btn  btn-secondary  btn-sm" data-cargo="Programador" data-toggle="modal" data-target="#exampleModal4">Agregar...</button>
+                <button type="button" class="btn  btn-secondary  btn-sm" data-cargo="Programador" data-toggle="modal" data-target="#exampleModal4">Agregar Actividad</button>
             </div>
         </div>
     </div>
@@ -292,313 +292,334 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <label>Fechas</label>
+                        <label>Fecha de inicio</label>
                         <div class="input-group">
+
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
                             <input class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" placeholder="yyyy-mm-dd" data-mask="" type="text" id="inicioActividad">
                         </div>
-                        <!-- /.input group -->
-                    </div>
-                    <!-- /.form group -->
-                    <!-- Date mm/dd/yyyy -->
-                    <div class="form-group">
+                        <label>Fecha de fin</label>
                         <div class="input-group">
-                            <div class="input-group-prepend">
+                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
                             <input class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" placeholder="yyyy-mm-dd" data-mask="" type="text" id="finActividad">
                         </div>
+                        <!-- /.input group -->
                     </div>
+                    <!-- /.form group -->
+                    <!-- Date mm/dd/yyyy -->
+                  
+                      
+                 
 
                 </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="input-group-prepend">
-                            <input class="form-control" placeholder="Porcentaje Plan" type="text" id="planActividad">
+                <!--  <div class="row">
+                        <div class="form-group">
+                            <div class="input-group-prepend">
+                                <input class="form-control" placeholder="Porcentaje Plan" type="text" id="planActividad">
+                            </div>
+                            <div class="input-group-prepend">
+                                <input class="form-control" placeholder="Porcentaje Avance" type="text" id="realActividad">
+                            </div>
                         </div>
-                        <div class="input-group-prepend">
-                            <input class="form-control" placeholder="Porcentaje Avance" type="text" id="realActividad">
-                        </div>
-                    </div>
+                    </div>-->
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary btnGrabarActividad" data-dismiss="modal" data-cargo="Coordinador">Grabar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary btnGrabarActividad" data-dismiss="modal" data-cargo="Coordinador">Grabar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="~/Content/plugins/jquery/jquery.min.js"></script>
-<script>
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <script>
 
 
-    function proyecto(id) {
-         var entidad = {};
-        entidad.codProyecto = id;
-        $.ajax({
-            "data": entidad,
-            "url": 'http://localhost:9586/api/Asignar/BuscarProyectoName',
-            "dataType": "json",
-            "type": "POST",
-            "cache": false,
-            "async": false,
-            success: function (data) {
-                  console.log(data);
-                    var fecha_creacion = new Date(data[0].fechaCreacion);
-                var fecha_inicio = new Date(data[0].fechaInicio);
-                var fecha_fin = new Date(data[0].fechaFin);
-                $("#nombreProyecto").val(data[0].nombreProyecto);
-                $("#jefeProyecto").val(data[0].jefeProyecto);
-                $("#usuarioCreacion").val(data[0].usuarioCreacion);
-                $("#fechaSolicitud").val(fecha_creacion.toLocaleDateString());
-                $("#fechaInicio").val(fecha_inicio.toLocaleDateString());
-                $("#fechaFin").val(fecha_fin.toLocaleDateString());
-
-            }
-        });
-
-        }
-
-        $(".btnBuscaRecurso").click(function () {
-            var cargo = $(this).data("cargo");
-            var apellido = $('#txtApellido'+cargo).val();
-            var cargo = $(this).data("cargo");
-            
-            var entidad = {};
-            entidad.Apellidos = apellido;
-            entidad.cargo = cargo;
+        function proyecto(id) {
+             var entidad = {};
+            entidad.codProyecto = id;
             $.ajax({
                 "data": entidad,
-                "url": 'http://localhost:9586/api/Asignar/BuscarRecurso',
+                "url": 'http://localhost:9586/api/Asignar/BuscarProyectoName',
                 "dataType": "json",
                 "type": "POST",
                 "cache": false,
                 "async": false,
                 success: function (data) {
-                    //console.log("objeto", data.length);
-                    output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
-                    output += '<thead><tr><th>Código</th><th>Nombres</th><th>Cargo</th><th>Opciones</th></thead><tbody>';
-                    console.log("datax", data);
-                      for(var i in data) {
-                    //console.log(data.codProyecto);
-                          if (data[i].idEmpleado == "0") {
-                        output += '<tr><td colspan="5" align="center">No hay coincidencias</td></tr>';
-                    }
-                    else {
-
-
-                              output += '<tr><th scope="row">' + data[i].idEmpleado + '</th><td>' + data[i].Nombres + ' ' + data[i].Apellidos + '</td><td>' + data[i].cargo + '</td><td align="center"><input class="form-check-input position-static" type="radio" name="blankRadio' + cargo + '" id="blankRadio1" data-nombres="' + data[i].Nombres + ' ' + data[i].Apellidos +'" value="' + data[i].idEmpleado + '"></td></tr>';
-                    }
-
-
-                    }
-                    output += '</table>';
-
-                    $('#resultado'+cargo).html(output);
+                      console.log(data);
+                        var fecha_creacion = new Date(data[0].fechaCreacion);
+                    var fecha_inicio = new Date(data[0].fechaInicio);
+                    var fecha_fin = new Date(data[0].fechaFin);
+                    $("#nombreProyecto").val(data[0].nombreProyecto);
+                    $("#jefeProyecto").val(data[0].jefeProyecto);
+                    $("#usuarioCreacion").val(data[0].usuarioCreacion);
+                    $("#fechaSolicitud").val(fecha_creacion.toLocaleDateString());
+                    $("#fechaInicio").val(fecha_inicio.toLocaleDateString());
+                    $("#fechaFin").val(fecha_fin.toLocaleDateString());
 
                 }
             });
 
-        });
-        proyecto(@ViewBag.idProyecto);
+            }
+
+            $(".btnBuscaRecurso").click(function () {
+                var cargo = $(this).data("cargo");
+                var apellido = $('#txtApellido'+cargo).val();
+                var cargo = $(this).data("cargo");
+
+                var entidad = {};
+                entidad.Apellidos = apellido;
+                entidad.cargo = cargo;
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/BuscarRecurso',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+                        //console.log("objeto", data.length);
+                        output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
+                        output += '<thead><tr><th>Código</th><th>Nombres</th><th>Cargo</th><th>Opciones</th></thead><tbody>';
+                        console.log("datax", data);
+                          for(var i in data) {
+                        //console.log(data.codProyecto);
+                              if (data[i].idEmpleado == "0") {
+                            output += '<tr><td colspan="5" align="center">No hay coincidencias</td></tr>';
+                        }
+                        else {
+
+
+                                  output += '<tr><th scope="row">' + data[i].idEmpleado + '</th><td>' + data[i].Nombres + ' ' + data[i].Apellidos + '</td><td>' + data[i].cargo + '</td><td align="center"><input class="form-check-input position-static" type="radio" name="blankRadio' + cargo + '" id="blankRadio1" data-nombres="' + data[i].Nombres + ' ' + data[i].Apellidos +'" value="' + data[i].idEmpleado + '"></td></tr>';
+                        }
+
+
+                        }
+                        output += '</table>';
+
+                        $('#resultado'+cargo).html(output);
+
+                    }
+                });
+
+            });
+            proyecto(@ViewBag.idProyecto);
 
         $(".btnCopiar").click(function () {
             var cargo = $(this).data("cargo");
-            var nombres = $("input[name=blankRadio" + cargo + "]:checked").data("nombres");
-            var codigo = $("input[name=blankRadio"+cargo+"]:checked").val();
-            $("#nombre" + cargo).val(nombres);
-            $("#codigo" + cargo).val(codigo);
-           // alert(nombres);
-            //alert($(this).data('codigo'));
+            var bool = window.confirm("¿Seguro de Asignar Recurso ?");
+            if (bool) {
+                var nombres = $("input[name=blankRadio" + cargo + "]:checked").data("nombres");
+                var codigo = $("input[name=blankRadio" + cargo + "]:checked").val();
+                $("#nombre" + cargo).val(nombres);
+                $("#codigo" + cargo).val(codigo);
 
-    });
-
-    $(".btnProgramador").click(function () {
-        var codigo = $("input[name=blankRadioProgramador]:checked").val();
-  
-        var entidad = {};
-        entidad.idProgramador = codigo;
-        entidad.idProyecto = @ViewBag.idProyecto;
-;
-        $.ajax({
-            "data": entidad,
-            "url": 'http://localhost:9586/api/Asignar/RecursoCRUD',
-            "dataType": "json",
-            "type": "POST",
-            "cache": false,
-            "async": false,
-            success: function (data) {
-                
-              
-                llenarTablaProgramador();
-                   
-
+                //alert("se asigno correctamente");
+            } else {
+                alert("canceló la asignación de recurso");
             }
+
+
+
+               // alert(nombres);
+                //alert($(this).data('codigo'));
+
         });
 
-    });
+        $(".btnProgramador").click(function () {
+            var codigo = $("input[name=blankRadioProgramador]:checked").val();
 
-    function llenarTablaProgramador() {
-        var entidad = {};
-        entidad.codProyecto = @ViewBag.idProyecto;;
-        $.ajax({
-            data: entidad,
-            type: 'POST',
-            url: 'http://localhost:9586/api/Asignar/ListadoProgramador',
-            dataType: 'json',
-            async: false,
-            success: function (data) {
-                output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
-                output += '<thead><tr><th>Cargo</th><th>Nombres</th><th>Apellidos</th><th>Operaciones</th></tr></thead><tbody>';
-
-
-                console.log("datax", data);
-                for (var i in data) {
-                   
-                    output += '<tr><td>' + data[i].cargo + '</td><td>' + data[i].Nombres + '</td><td>' +  data[i].Apellidos +  '</td><td align="center"><a href="retirar/index/' + data[i].codEmpleado + '">Retirar</a></td></tr>';
-                    //console.log(data[i].DEPA_DESCRIPCION);
-
-                }
-                $('#tablaProgramador').html(output);
+            var entidad = {};
+            entidad.idProgramador = codigo;
+            entidad.idProyecto = @ViewBag.idProyecto;
+            var bool = window.confirm("¿Seguro de seleccionar Programador ?");
+            if (bool) {
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/RecursoCRUD',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
 
 
+                        llenarTablaProgramador();
 
-
-            }
-        });
-
-        
-
-    }
-
-    function llenarTablaActividades() {
-        var entidad = {};
-        entidad.codProyecto = @ViewBag.idProyecto;;
-        $.ajax({
-            data: entidad,
-            type: 'POST',
-            url: 'http://localhost:9586/api/Asignar/ListadoActividad',
-            dataType: 'json',
-            async: false,
-            success: function (data) {
-                output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
-                output += '<thead><tr><th>Descripción</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Estado</th><th>% Plan</th><th>% Real</th><th>Operaciones</th></tr></thead><tbody>';
-
-
-                console.log("datax", data);
-                if (data[0].idActividad != 0) {
-                for (var i in data) {
-                  
-                    var fecha_inicio = new Date(data[i].fechaInicio);
-                    var fecha_fin = new Date(data[i].fechaFin);
-                    output += '<tr><td>' + data[i].descripcion + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td>' + data[i].porcentajePlan + '</td><td>' + data[i].porcentajeReal + '</td><td align="center"><a class="eliminar" href="#" data-id="' + data[i].idActividad + '">Retirar</a></td></tr>';
-                    //console.log(data[i].DEPA_DESCRIPCION);
 
                     }
-                }
-                $('#tablaActividades').html(output);
+                });
+            } else {
 
-
-
-
+                alert("Se canceló la selección del progamador");
             }
+
         });
 
-        
-
-    }
-
-
-    $(".btnGrabarActividad").click(function () {
-        var codigo = $("input[name=blankRadioProgramador]:checked").val();
-  
-        var entidad = {};
-   
-    
-        entidad.idProyecto = @ViewBag.idProyecto;
-        entidad.fechaFin = $("#finActividad").val();
-        entidad.fechaInicio = $("#inicioActividad").val();
-        entidad.descripcion = $("#txtActividad").val();
-        entidad.porcentajeReal = $("#realActividad").val();
-        entidad.porcentajePlan = $("#planActividad").val();
-        entidad.estado = 'Nuevo';
-        console.log(entidad);           
-    
-        $.ajax({
-            "data": entidad,
-            "url": 'http://localhost:9586/api/Asignar/ActividadCRUD',
-            "dataType": "json",
-            "type": "POST",
-            "cache": false,
-            "async": false,
-            success: function (data) {
-                console.log("Actividad",data);
-              
-                llenarTablaActividades();
-                   
-
-            }
-        });
-
-    });
-    llenarTablaProgramador();
-    llenarTablaActividades();
-
-    $('.eliminar').click(function (e) {
-        var bool = window.confirm("Seguro de eliminar el Recurso?");
-        if (bool) {
-
-
-            alert("se eliminó correctamente");
-        } else {
-            alert("canceló la solicitud");
-        }
-       
-    });
-
-    $(".btnGrabar").click(function () {
-        mensaje= $(this).data("mensaje");
-        var inps = $("#codigoInspector").val();
-        var coor = $("#codigoCoordinador").val();
-
-        if (inps == '' || coor == ''){
-            window.confirm("Falta asignar Coordinador o Inspector");
-            return;
-
-    }
-        entidad = {};
-        entidad.idProyecto =@ViewBag.idProyecto;
-        entidad.idInspector = inps;
-        entidad.idCoordinador = coor;
-        entidad.estadoSolicitud = $(this).data("estado");
-        entidad.Observacion = 'xxxx';
-        entidad.fechaAprobacion = "2018-07-05";
-        console.log(entidad);
-        var bool = window.confirm("Esta seguro de " + mensaje+" la solicitud?");
-        if (bool && mensaje != "Rechazar") {
+        function llenarTablaProgramador() {
+            var entidad = {};
+            entidad.codProyecto = @ViewBag.idProyecto;;
             $.ajax({
-                "data": entidad,
-                "url": 'http://localhost:9586/api/Asignar/SolicitudCRUD',
-                "dataType": "json",
-                "type": "POST",
-                "cache": false,
-                "async": false,
+                data: entidad,
+                type: 'POST',
+                url: 'http://localhost:9586/api/Asignar/ListadoProgramador',
+                dataType: 'json',
+                async: false,
                 success: function (data) {
-                    console.log("Solicitud", data);
+                    output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
+                    output += '<thead><tr><th>Cargo</th><th>Nombres</th><th>Apellidos</th><th>Operaciones</th></tr></thead><tbody>';
+
+
+                    console.log("datax", data);
+                    for (var i in data) {
+
+                        output += '<tr><td>' + data[i].cargo + '</td><td>' + data[i].Nombres + '</td><td>' +  data[i].Apellidos +  '</td><td align="center"><a href="retirar/index/' + data[i].codEmpleado + '">Retirar</a></td></tr>';
+                        //console.log(data[i].DEPA_DESCRIPCION);
+
+                    }
+                    $('#tablaProgramador').html(output);
+
+
+
 
                 }
             });
-            alert("se " + mensaje + " la solicitud correctamente");
 
-            window.location.href = 'http://localhost:4356/';
-        } else {
-            // alert("canceló la solicitud");
+
+
+        }
+
+        function llenarTablaActividades() {
+            var entidad = {};
+            entidad.codProyecto = @ViewBag.idProyecto;;
+            $.ajax({
+                data: entidad,
+                type: 'POST',
+                url: 'http://localhost:9586/api/Asignar/ListadoActividad',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
+                    output += '<thead><tr><th>Actividad</th><th>Fecha de Inicio</th><th>Fecha de  Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+
+
+                    console.log("datax", data);
+                    if (data[0].idActividad != 0) {
+                    for (var i in data) {
+
+                        var fecha_inicio = new Date(data[i].fechaInicio);
+                        var fecha_fin = new Date(data[i].fechaFin);
+                        output += '<tr><td>' + data[i].descripcion + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td align="center"><a class="eliminar" href="#" data-id="' + data[i].idActividad + '">Borrar</a></td></tr>';
+                        //console.log(data[i].DEPA_DESCRIPCION);
+
+                        }
+                    }
+                    $('#tablaActividades').html(output);
+
+
+
+
+                }
+            });
+
+
+
         }
 
 
-    });
-</script>
+        $(".btnGrabarActividad").click(function () {
+           // var codigo = $("input[name=blankRadioProgramador]:checked").val();
+
+            if ($("#txtActividad").val() != "" && $("#finActividad").val() != "" && $("#inicioActividad").val() != "") {
+                var entidad = {};
+                entidad.idProyecto = @ViewBag.idProyecto;
+                entidad.fechaFin = $("#finActividad").val();
+                entidad.fechaInicio = $("#inicioActividad").val();
+                entidad.descripcion = $("#txtActividad").val();
+                entidad.porcentajeReal = $("#realActividad").val();
+                entidad.porcentajePlan = $("#planActividad").val();
+                entidad.estado = 'Nuevo';
+                console.log(entidad);
+
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/ActividadCRUD',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+                        console.log("Actividad", data);
+
+                        llenarTablaActividades();
+
+
+                    }
+                });
+            } else {
+                alert("Debe completar los datos de la actividad");
+                return;
+            }
+
+        });
+        llenarTablaProgramador();
+        llenarTablaActividades();
+
+        $('.eliminar').click(function (e) {
+            var bool = window.confirm("Seguro de eliminar la actividad?");
+            if (bool) {
+
+
+                alert("se eliminó correctamente");
+            } else {
+                alert("canceló la solicitud");
+            }
+
+        });
+
+        $(".btnGrabar").click(function () {
+            mensaje= $(this).data("mensaje");
+            var inps = $("#codigoInspector").val();
+            var coor = $("#codigoCoordinador").val();
+
+            if (inps == '' || coor == ''){
+                window.confirm("Falta asignar Coordinador o Inspector");
+                return;
+
+        }
+            entidad = {};
+            entidad.idProyecto =@ViewBag.idProyecto;
+            entidad.idInspector = inps;
+            entidad.idCoordinador = coor;
+            entidad.estadoSolicitud = $(this).data("estado");
+            entidad.Observacion = 'xxxx';
+            entidad.fechaAprobacion = "2018-07-05";
+            console.log(entidad);
+            var bool = window.confirm("Esta seguro de " + mensaje+" la solicitud?");
+            if (bool && mensaje != "Rechazar") {
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/SolicitudCRUD',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+                        console.log("Solicitud", data);
+
+                    }
+                });
+                alert("se " + mensaje + " la solicitud correctamente");
+
+                window.location.href = 'http://localhost:4356/';
+            } else {
+                // alert("canceló la solicitud");
+            }
+
+
+        });
+    </script>

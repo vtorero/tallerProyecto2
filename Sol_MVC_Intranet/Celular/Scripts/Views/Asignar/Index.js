@@ -17,11 +17,12 @@ $("#btnBuscar").click(function () {
     var proyecto = $('#txtProyecto').val();
     var est = $('#txtestado').val();
     console.log(proyecto);
-    var entidad = {};
-    var total = 0;
-    entidad.nombreProyecto = proyecto;
-    entidad.estado = est;
-            $.ajax({
+    if (proyecto !== "" || est !== "0") {
+        var entidad = {};
+        var total = 0;
+        entidad.nombreProyecto = proyecto;
+        entidad.estado = est;
+        $.ajax({
             "data": entidad,
             "url": 'http://localhost:9586/api/Asignar/BuscarProyectoName',
             "dataType": "json",
@@ -35,26 +36,29 @@ $("#btnBuscar").click(function () {
                 console.log("datax", data);
                 for (const i in data) {
                     total++;
-                //console.log(data.codProyecto);
-                if (data.estado == "0: Registros encontrados") {
-                    output += '<tr><td colspan="7" align="center">' + data.estado + '</td></tr>';
-                }
-                else {
+                    //console.log(data.codProyecto);
+                    if (data.estado == "0: Registros encontrados") {
+                        output += '<tr><td colspan="7" align="center">' + data.estado + '</td></tr>';
+                    }
+                    else {
 
-                    var fecha_creacion = new Date(data[i].fechaCreacion);
-                    var fecha_inicio = new Date(data[i].fechaInicio);
-                    var fecha_fin = new Date(data[i].fechaFin);
+                        var fecha_creacion = new Date(data[i].fechaCreacion);
+                        var fecha_inicio = new Date(data[i].fechaInicio);
+                        var fecha_fin = new Date(data[i].fechaFin);
 
-                    output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto +'">Seleccionar</a></td></tr>';
-                }
+                        output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto + '">Visualizar</a></td></tr>';
+                    }
                     //console.log(data[i].DEPA_DESCRIPCION);
-               
-                  }
-                output += '</table><br><b>Total Registros encontrados: ' + total + '</b>';
+
+                }
+                output += '</table><br><b>Total registros encontrados: ' + total + '</b>';
                 $('#resultado').html(output);
 
             }
         });
+    } else {
+        alert("Debe ingresar al menos un criterio de búsqueda");
+    }
      
 });
 
@@ -76,13 +80,13 @@ function llenarTabla2() {
                 var fecha_creacion = new Date(data[i].fechaCreacion);
                 var fecha_inicio = new Date(data[i].fechaInicio);
                 var fecha_fin = new Date(data[i].fechaFin);
-                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto + '">Seleccionar</a></td></tr>';
+                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto + '">Visualizar</a></td></tr>';
                 //console.log(data[i].DEPA_DESCRIPCION);
 
             }
             
 
-            output +='</table><br><b>Total Registros encontrados: ' + total + '</b>';
+            output +='</table><br><b>Total registros encontrados: ' + total + '</b>';
             $('#resultado').html(output);
 
         }
