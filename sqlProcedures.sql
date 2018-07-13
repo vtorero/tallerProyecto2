@@ -1,6 +1,6 @@
 USE [inspeccion]
 GO
-/****** Object:  StoredProcedure [dbo].[SP_BUSCA_PROYECTO]    Script Date: 07/04/2018 18:29:06 ******/
+/****** Object:  StoredProcedure [dbo].[SP_BUSCA_PROYECTO]    Script Date: 07/13/2018 14:57:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -20,9 +20,12 @@ SELECT * FROM dbo.proyecto p WHERE estado=@estado;
 END
 if(@codigo is not null)
  BEGIN
-SELECT * FROM dbo.proyecto p WHERE codProyecto=@codigo;
+SELECT p.*, (select Nombres +' '+ Apellidos from empleado where idEmpleado=s.idCoordinador) coordinador,
+(select Nombres +' '+ Apellidos from empleado where idEmpleado=s.idInspector) inspector
+ FROM  dbo.proyecto p left join dbo.solicitud s  on s.idProyecto=p.codProyecto where  p.codProyecto=@codigo;
 END
 END
+
 
 
 USE [inspeccion]
