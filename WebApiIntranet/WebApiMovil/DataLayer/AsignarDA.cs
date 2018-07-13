@@ -301,6 +301,10 @@ namespace WebApiMovil.DataLayer
                                         entidad.usuarioCreacion = dr.GetString(dr.GetOrdinal("usuarioCreacion"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("jefeProyecto")))
                                         entidad.jefeProyecto= dr.GetString(dr.GetOrdinal("jefeProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("coordinador")))
+                                        entidad.Coordinador = dr.GetString(dr.GetOrdinal("coordinador"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("inspector")))
+                                        entidad.Inspector = dr.GetString(dr.GetOrdinal("inspector"));
                                     Lista.Add(entidad);
                                 }
                             }
