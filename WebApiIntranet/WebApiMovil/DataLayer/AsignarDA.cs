@@ -244,11 +244,60 @@ namespace WebApiMovil.DataLayer
                                         proyecto.usuarioCreacion = dr.GetString(dr.GetOrdinal("usuarioCreacion"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("jefeProyecto")))
                                         proyecto.jefeProyecto = dr.GetString(dr.GetOrdinal("jefeProyecto"));
+
                                     Lista.Add(proyecto);
                                 }
                             }
                         }
 
+                    }
+                    conection.Close();
+                }
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        public List<Actividades> BuscarActividades(Actividades entidad)
+        {
+            List<Actividades> Lista = null;
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
+                {
+                    conection.Open();
+
+                    using (SqlCommand command = new SqlCommand("SP_BUSCA_ACTIVIDADES", conection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@descripcion", entidad.Descripcion);
+                       
+
+
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                Lista = new List<Actividades>();
+                                while (dr.Read())
+                                {
+                                    Actividades actividad = new Actividades();
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idActividad")))
+                                        actividad.idActividad = dr.GetInt32(dr.GetOrdinal("idActividad"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("Descripcion")))
+                                        actividad.Descripcion = dr.GetString(dr.GetOrdinal("Descripcion"));
+                                    
+                                    Lista.Add(actividad);
+                                }
+                            }
+                            else
+                            {
+                                entidad.idActividad = 0;
+                            }
+                        }
                     }
                     conection.Close();
                 }
@@ -305,6 +354,10 @@ namespace WebApiMovil.DataLayer
                                         entidad.Coordinador = dr.GetString(dr.GetOrdinal("coordinador"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("inspector")))
                                         entidad.Inspector = dr.GetString(dr.GetOrdinal("inspector"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idCoordinador")))
+                                        entidad.idCoordinador = dr.GetInt32(dr.GetOrdinal("idCoordinador"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idInspector")))
+                                        entidad.idInspector = dr.GetInt32(dr.GetOrdinal("idInspector"));
                                     Lista.Add(entidad);
                                 }
                             }

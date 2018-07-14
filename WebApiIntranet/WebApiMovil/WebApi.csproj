@@ -229,6 +229,7 @@
     </Compile>
     <Compile Include="Models\Accesorio.cs" />
     <Compile Include="Models\Actividad.cs" />
+    <Compile Include="Models\Actividades.cs" />
     <Compile Include="Models\Asignacion.cs" />
     <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\Encargado.cs" />

@@ -172,8 +172,9 @@
                 <h3 class="card-title">Cronograma</h3>
             </div>
             <div class="card-body">
-                <div id="tablaActividades"></div>
                 <button type="button" class="btn  btn-secondary  btn-sm" data-cargo="Programador" data-toggle="modal" data-target="#exampleModal4">Agregar Actividad</button>
+                <div id="tablaActividades"></div>
+                
             </div>
         </div>
     </div>
@@ -285,9 +286,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <input type="hidden" id="id">
-                        <input type="text" class="form-control" placeholder="Actividad" id="txtActividad">
+                        <input type="text" class="form-control" placeholder="Detalle" id="txtActividad">
                     </div>
+                    <div class="col">
+                        <button type="button"  class="btnBuscaActvidades btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+                <div id="resultadActividades">
 
                 </div>
                 <div class="row">
@@ -302,7 +307,7 @@
                         </div>
                         <label>Fecha de fin</label>
                         <div class="input-group">
-                             <div class="input-group-prepend">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
                             <input class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" placeholder="yyyy-mm-dd" data-mask="" type="text" id="finActividad">
@@ -311,22 +316,22 @@
                     </div>
                     <!-- /.form group -->
                     <!-- Date mm/dd/yyyy -->
-                  
-                      
-                 
+
+
+
 
                 </div>
                 <!--  <div class="row">
-                        <div class="form-group">
-                            <div class="input-group-prepend">
-                                <input class="form-control" placeholder="Porcentaje Plan" type="text" id="planActividad">
-                            </div>
-                            <div class="input-group-prepend">
-                                <input class="form-control" placeholder="Porcentaje Avance" type="text" id="realActividad">
-                            </div>
-                        </div>
-                    </div>-->
+            <div class="form-group">
+                <div class="input-group-prepend">
+                    <input class="form-control" placeholder="Porcentaje Plan" type="text" id="planActividad">
                 </div>
+                <div class="input-group-prepend">
+                    <input class="form-control" placeholder="Porcentaje Avance" type="text" id="realActividad">
+                </div>
+            </div>
+        </div>-->
+            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary btnGrabarActividad" data-dismiss="modal" data-cargo="Coordinador">Grabar</button>
@@ -351,14 +356,16 @@
                 "async": false,
                 success: function (data) {
                       console.log(data);
-                        var fecha_creacion = new Date(data[0].fechaCreacion);
+                    var fecha_creacion = new Date(data[0].fechaCreacion);
                     var fecha_inicio = new Date(data[0].fechaInicio);
                     var fecha_fin = new Date(data[0].fechaFin);
                     $("#nombreProyecto").val(data[0].nombreProyecto);
                     $("#jefeProyecto").val(data[0].jefeProyecto);
                     $("#usuarioCreacion").val(data[0].usuarioCreacion);
                     $("#nombreCoordinador").val(data[0].Coordinador);
+                    $("#codigoCoordinador").val(data[0].idCoordinador);
                     $("#nombreInspector").val(data[0].Inspector);
+                    $("#codigoInspector").val(data[0].idInspector);
                     $("#fechaSolicitud").val(fecha_creacion.toLocaleDateString());
                     $("#fechaInicio").val(fecha_inicio.toLocaleDateString());
                     $("#fechaFin").val(fecha_fin.toLocaleDateString());
@@ -430,6 +437,52 @@
                // alert(nombres);
                 //alert($(this).data('codigo'));
 
+        });
+
+        
+
+        $(".btnBuscaActvidades").click(function () {
+            var descrip = $("#txtActividad").val();
+
+            var entidad = {};
+            entidad.Descripcion = descrip;
+        
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/BuscarActividades',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+
+                        output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
+                        output += '<thead><tr><th>Código</th><th>Descripcion</th><th>Opciones</th></thead><tbody>';
+                        console.log("datax", data);
+                        for (var i in data) {
+                            //console.log(data.codProyecto);
+                            if (data[i].idActividad == 0) {
+                                output += '<tr><td colspan="4" align="center">No hay coincidencias</td></tr>';
+                            }
+                            else {
+
+
+                                output += '<tr><th scope="row">' + data[i].idActividad + '</th><td>' + data[i].Descripcion + '</td><td align="center"><input class="form-check-input position-static" type="radio" name="blankRadio' + cargo + '" id="blankRadio1"  value="' + data[i].idActividad + '"></td></tr>';
+                            }
+
+
+                        }
+                        output += '</table>';
+
+                        $('#resultadActividades').html(output);
+
+                    }
+                    
+
+
+                    
+                });
+           
         });
 
         $(".btnProgramador").click(function () {

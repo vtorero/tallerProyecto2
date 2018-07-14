@@ -303,8 +303,8 @@ D:\tallerProyecto2\Sol_MVC_Intranet\Celular\bin\es\System.Web.Razor.resources.dl
 D:\tallerProyecto2\Sol_MVC_Intranet\Celular\bin\es\System.Web.WebPages.resources.dll
 D:\tallerProyecto2\Sol_MVC_Intranet\Celular\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\tallerProyecto2\Sol_MVC_Intranet\Celular\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\tallerProyecto2\Sol_MVC_Intranet\Celular\obj\Debug\MVC.csprojAssemblyReference.cache
 D:\tallerProyecto2\Sol_MVC_Intranet\Celular\obj\Debug\MVC.csproj.CoreCompileInputs.cache
 D:\tallerProyecto2\Sol_MVC_Intranet\Celular\obj\Debug\MVC.csproj.CopyComplete
 D:\tallerProyecto2\Sol_MVC_Intranet\Celular\obj\Debug\Celular.dll
 D:\tallerProyecto2\Sol_MVC_Intranet\Celular\obj\Debug\Celular.pdb
+D:\tallerProyecto2\Sol_MVC_Intranet\Celular\obj\Debug\MVC.csprojAssemblyReference.cache

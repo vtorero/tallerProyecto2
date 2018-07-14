@@ -29,5 +29,9 @@ namespace WebApiMovil.Models
         public string Inspector { get; set; }
         [DataMember]
         public string Coordinador{ get; set; }
+        [DataMember]
+        public int idInspector { get; set; }
+        [DataMember]
+        public int idCoordinador { get; set; }
     }
 }

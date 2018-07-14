@@ -38,6 +38,18 @@ namespace WebApiMovil.Services
             }
         }
 
+        public List<Actividades> BuscarActividades(Actividades entidad)
+        {
+            try
+            {
+                return asignarBL.buscarActividad(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<Empleado> BuscarRecurso(Empleado entidad)
         {
             try
