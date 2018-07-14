@@ -21,7 +21,19 @@ namespace WebApiMovil.Controllers
         }
 
         //[Authorize]
-
+        [HttpPost]
+        [ActionName("BuscarSolicitudes")]
+        public List<Solicitudes> BuscarSolicitudes(Solicitudes entidad)
+        {
+            try
+            {
+                return asignarService.BuscaSolicitudes(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        } 
         [HttpPost]
         [ActionName("BuscarActividades")]
         public List<Actividades> BuscarActividades(Actividades entidad)

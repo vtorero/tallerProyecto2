@@ -309,6 +309,62 @@ namespace WebApiMovil.DataLayer
             }
         }
 
+        public List<Solicitudes> BuscarSolicitudes(Solicitudes entidad)
+        {
+            List<Solicitudes> Lista = null;
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
+                {
+                    conection.Open();
+
+                    using (SqlCommand command = new SqlCommand("SP_BUSCA_SOLICITUDES", conection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@descripcion", entidad.nombreProyecto);
+
+
+
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                Lista = new List<Solicitudes>();
+                                while (dr.Read())
+                                {
+                                    Solicitudes solicitud = new Solicitudes();
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idSolicitud")))
+                                        solicitud.idSolicitud = dr.GetInt32(dr.GetOrdinal("idSolicitud"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("idProyecto")))
+                                        solicitud.idProyecto = dr.GetInt32(dr.GetOrdinal("idProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("nombreProyecto")))
+                                        solicitud.nombreProyecto = dr.GetString(dr.GetOrdinal("nombreProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("estadoSolicitud")))
+                                        solicitud.estadoSolicitud = dr.GetString(dr.GetOrdinal("estadoSolicitud"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("jefeProyecto")))
+                                        solicitud.jefeProyecto = dr.GetString(dr.GetOrdinal("jefeProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("fechaAprobacion")))
+                                        solicitud.fechaAprobacion = dr.GetDateTime(dr.GetOrdinal("fechaAprobacion"));
+
+                                    Lista.Add(solicitud);
+                                }
+                            }
+                            else
+                            {
+                                entidad.idSolicitud = 0;
+                            }
+                        }
+                    }
+                    conection.Close();
+                }
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
         public List<Proyecto> ObtenerProyectoName(Proyecto proyecto)
         {
             List<Proyecto> Lista = null;

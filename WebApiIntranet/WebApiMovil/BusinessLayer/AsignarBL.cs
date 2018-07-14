@@ -99,6 +99,18 @@ namespace WebApiMovil.BusinessLayer
             }
         }
 
+        public List<Solicitudes> buscarSolicitudes(Solicitudes entidad)
+        {
+            try
+            {
+                return asignarDA.BuscarSolicitudes(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<Actividades> buscarActividad(Actividades entidad)
         {
             try

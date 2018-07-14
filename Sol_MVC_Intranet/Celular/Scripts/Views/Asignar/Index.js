@@ -4,6 +4,7 @@ var tblAsignacion = null;
 var tblAccesorioDev = null;
 $(document).ready(function () {
     llenarTabla2();
+    llenarSolicitudes();
 });
 
 $("#btnAgregar").click(function () {
@@ -61,6 +62,44 @@ $("#btnBuscar").click(function () {
     }
      
 });
+
+function llenarSolicitudes() {
+    var entidad = {};
+    entidad.nombreProyecto = '';
+    
+    $.ajax({
+        "type": 'POST',
+        "data": entidad,
+        "url":'http://localhost:9586/api/Asignar/BuscarSolicitudes',
+        "dataType": "json",
+        "type": "POST",
+        "cache": false,
+        "async": false,
+        success: function (data) {
+            output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
+            output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha Aprobación</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+
+            var total = 0;
+            console.log("datas", data);
+            for (var i in data) {
+                total++;
+                
+                var fecha_aprobacion = new Date(data[i].fechaAprobacion);
+                output += '<tr><th scope="row">' + data[i].idProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_aprobacion.toLocaleDateString() + '</td><td>' + data[i].estadoSolicitud + '</td><td><a href="inspeccion/index/' + data[i].idSolicitud + '">Gestionar</a></td></tr>';
+                //console.log(data[i].DEPA_DESCRIPCION);
+
+            }
+
+
+            output += '</table><br><b>Total registros encontrados: ' + total + '</b>';
+            $('#resultadoSolicitudes').html(output);
+
+        }
+    });
+
+
+
+}
 
 function llenarTabla2() {  
     $.ajax({

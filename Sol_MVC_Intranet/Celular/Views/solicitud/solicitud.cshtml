@@ -467,7 +467,7 @@
                             else {
 
 
-                                output += '<tr><th scope="row">' + data[i].idActividad + '</th><td>' + data[i].Descripcion + '</td><td align="center"><input class="form-check-input position-static" type="radio" name="blankRadio' + cargo + '" id="blankRadio1"  value="' + data[i].idActividad + '"></td></tr>';
+                                output += '<tr><th scope="row">' + data[i].idActividad + '</th><td>' + data[i].Descripcion + '</td><td align="center"><input class="form-check-input position-static" type="radio" name="blankRadioaActividad" id="blankRadioActividad" data-desc="' + data[i].Descripcion + '"  value="' + data[i].idActividad + '"></td></tr>';
                             }
 
 
@@ -587,14 +587,16 @@
 
 
         $(".btnGrabarActividad").click(function () {
-           // var codigo = $("input[name=blankRadioProgramador]:checked").val();
+            var desc = $("input[name=blankRadioaActividad]:checked").data("desc");
+            alert(desc);
+       
 
-            if ($("#txtActividad").val() != "" && $("#finActividad").val() != "" && $("#inicioActividad").val() != "") {
+            if (desc != "" && $("#finActividad").val() != "" && $("#inicioActividad").val() != "") {
                 var entidad = {};
                 entidad.idProyecto = @ViewBag.idProyecto;
                 entidad.fechaFin = $("#finActividad").val();
                 entidad.fechaInicio = $("#inicioActividad").val();
-                entidad.descripcion = $("#txtActividad").val();
+                entidad.descripcion = desc;
                 entidad.porcentajeReal = $("#realActividad").val();
                 entidad.porcentajePlan = $("#planActividad").val();
                 entidad.estado = 'Nuevo';
