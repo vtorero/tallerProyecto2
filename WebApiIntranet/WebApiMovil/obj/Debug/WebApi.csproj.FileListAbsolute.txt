@@ -384,8 +384,8 @@ D:\tallerProyecto2\WebApiIntranet\WebApiMovil\bin\es\System.Web.Razor.resources.
 D:\tallerProyecto2\WebApiIntranet\WebApiMovil\bin\es\System.Web.WebPages.resources.dll
 D:\tallerProyecto2\WebApiIntranet\WebApiMovil\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\tallerProyecto2\WebApiIntranet\WebApiMovil\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\tallerProyecto2\WebApiIntranet\WebApiMovil\obj\Debug\WebApi.csprojAssemblyReference.cache
 D:\tallerProyecto2\WebApiIntranet\WebApiMovil\obj\Debug\WebApi.csproj.CoreCompileInputs.cache
 D:\tallerProyecto2\WebApiIntranet\WebApiMovil\obj\Debug\WebApi.csproj.CopyComplete
 D:\tallerProyecto2\WebApiIntranet\WebApiMovil\obj\Debug\WebApiMovil.dll
 D:\tallerProyecto2\WebApiIntranet\WebApiMovil\obj\Debug\WebApiMovil.pdb
+D:\tallerProyecto2\WebApiIntranet\WebApiMovil\obj\Debug\WebApi.csprojAssemblyReference.cache

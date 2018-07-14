@@ -72,8 +72,7 @@ function llenarSolicitudes(d) {
     var criterio = d;
     var entidad = {};
     entidad.nombreProyecto = d;
-    
-    $.ajax({
+        $.ajax({
         "type": 'POST',
         "data": entidad,
         "url":'http://localhost:9586/api/Asignar/BuscarSolicitudes',

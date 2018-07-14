@@ -1,8 +1,698 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "solicitud";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">DATOS DEL PROYECTO</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Proyecto</label>
+                    <input class="form-control" disabled="" type="text" id="nombreProyecto">
+                </div>
+                <div class="form-group">
+                    <label>Jefe  de Proyecto</label>
+                    <input class="form-control" disabled="" type="text" id="jefeProyecto">
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Aprobación</label>
+                    <input class="form-control" disabled="" type="text" id="fechaAprobacion">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Porcentaje Avance</label>
+                    <input class="form-control" disabled="" type="text" id="porcentajeAvance">
+                </div>
+            
 
-<h2>Index @ViewBag.idSolicitud;</h2>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card-body">
+                <label>Operaciones</label>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-primary btnGrabar btn-sm" data-estado="Aceptada" data-mensaje="Aceptar">Generar Acta Reunión</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-danger btnGrabar btn-sm" data-estado="Rechazada" data-mensaje="Rechazar">Cerrar</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-success btnGrabar btn-sm" data-estado="Pendiente" data-mensaje="Grabar">Grabar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Jefe de Inspección</label>
+                    <input class="form-control" disabled="" type="text" value="Juan Ramirez" id="jefeInspeccion">
+                </div>
+                <!--<div class="form-group">
+                    <label>Usuario creación</label>
+                    <input class="form-control" disabled="" type="text" id="usuarioCreacion">
+                </div>-->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Coordinador</h3>
+            </div>
+            <div class="card-body">
+                <label>Nombre Coordinador</label>
+                <input type="hidden" id="codigoCoordinador" />
+                <input class="form-control" placeholder="" type="text" id="nombreCoordinador" disabled="">
+                
+                <!-- /.form group -->
+                <!-- Date mm/dd/yyyy -->
+                
+          
+            </div>
+            <!-- /.form group -->
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <div class="col-sm-6">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title"> Inspector</h3>
+            </div>
+            <div class="card-body">
+                <label>Nombre Inspector</label>
+                <input type="hidden" id="codigoInspector" />
+                <input class="form-control" placeholder="" type="text" id="nombreInspector" disabled="">
+             
+                <!-- /.form group -->
+                <!-- Date mm/dd/yyyy -->
+                
+               <!-- /.input group -->
+            </div>
+            <!-- /.form group -->
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Programadores</h3>
+            </div>
+            <div class="card-body">
+                
+                <div id="tablaProgramador"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Actividades Programadas</h3>
+            </div>
+            <div class="card-body">
+                  <div id="tablaActividades"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Resultado SonarQube</h3>
+            </div>
+            <div class="card-body">
+
+                <div id="tablaSonar"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar Recursos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" id="idCoordinador">
+                        <input type="text" class="form-control" placeholder="Apellido" id="txtApellidoCoordinador">
+                    </div>
+                    <div class="col">
+                        <button type="button" data-cargo="Coordinador" class="btnBuscaRecurso btn btn-secondary">Buscar</button>
+                    </div>
+                </div>
+                <div id="resultadoCoordinador">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btnCopiar" data-dismiss="modal" data-cargo="Coordinador">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Buscar Recursos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" id="idInspector">
+                        <input type="text" class="form-control" placeholder="Apellido" id="txtApellidoInspector">
+                    </div>
+                    <div class="col">
+                        <button type="button" data-cargo="Inspector" class="btnBuscaRecurso btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+                <hr />
+                <div id="resultadoInspector">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btnCopiar" data-dismiss="modal" data-cargo="Inspector">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal3" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Buscar Programador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" id="idProgramador">
+                        <input type="text" class="form-control" placeholder="Apellido" id="txtApellidoProgramador">
+                    </div>
+                    <div class="col">
+                        <button type="button" data-cargo="Programador" class="btnBuscaRecurso btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+                <hr />
+                <div id="resultadoProgramador">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btnProgramador" data-dismiss="modal" data-cargo="Programador">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--cronograma  modal-->
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Actividad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" id="idActividad" />
+                        <input type="text" class="form-control" placeholder="Detalle" id="txtActividad">
+                    </div>
+                    
+                </div>
+                
+                <div class="row">
+                    <div class="form-group">
+                        <label>Fecha de inicio</label>
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" placeholder="yyyy-mm-dd" data-mask="" type="text" id="inicioActividad">
+                        </div>
+                        <label>Fecha de fin</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" placeholder="yyyy-mm-dd" data-mask="" type="text" id="finActividad">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <!-- /.form group -->
+                    <!-- Date mm/dd/yyyy -->
+
+
+
+
+                </div>
+              <div class="row">
+                    <div class="form-group">
+                        <div class="input-group-prepend">
+                            <input class="form-control" placeholder="Porcentaje Plan" type="text" id="planActividad">
+                        </div>
+                        <div class="input-group-prepend">
+                            <input class="form-control" placeholder="Porcentaje Avance" type="text" id="realActividad">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btnGrabarActividad" data-dismiss="modal" data-cargo="Coordinador">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/plugins/jquery/jquery.min.js"></script>
+<script>
+
+ 
+    function proyecto(id) {
+               var entidad = {};
+        entidad.idSolicitud = 1;
+            $.ajax({
+                "data": entidad,
+                "url": 'http://localhost:9586/api/Asignar/BuscarSolicitudes',
+                "dataType": "json",
+                "type": "POST",
+                "cache": false,
+                "async": false,
+                success: function (data) {
+                      console.log("solicitudata",data);
+                    var fecha_creacion = new Date(data[0].fechaAprobacion);
+                    var fecha_inicio = new Date(data[0].fechaInicio);
+                    var fecha_fin = new Date(data[0].fechaFin);
+                    $("#nombreProyecto").val(data[0].nombreProyecto);
+                    $("#jefeProyecto").val(data[0].jefeProyecto);
+                    $("#usuarioCreacion").val(data[0].usuarioCreacion);
+                    $("#nombreCoordinador").val(data[0].coordinador);
+                    $("#codigoCoordinador").val(data[0].idCoordinador);
+                    $("#nombreInspector").val(data[0].inspector);
+                    $("#codigoInspector").val(data[0].idInspector);
+                    $("#fechaAprobacion").val(fecha_creacion.toLocaleDateString());
+                    $("#fechaInicio").val(fecha_inicio.toLocaleDateString());
+                    $("#fechaFin").val(fecha_fin.toLocaleDateString());
+
+                }
+            });
+
+            }
+
+            $(".btnBuscaRecurso").click(function () {
+                var cargo = $(this).data("cargo");
+                var apellido = $('#txtApellido'+cargo).val();
+                var cargo = $(this).data("cargo");
+
+                var entidad = {};
+                entidad.Apellidos = apellido;
+                entidad.cargo = cargo;
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/BuscarRecurso',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+                        //console.log("objeto", data.length);
+                        output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
+                        output += '<thead><tr><th>Código</th><th>Nombres</th><th>Cargo</th><th>Opciones</th></thead><tbody>';
+                        console.log("datax", data);
+                          for(var i in data) {
+                        //console.log(data.codProyecto);
+                              if (data[i].idEmpleado == "0") {
+                            output += '<tr><td colspan="5" align="center">No hay coincidencias</td></tr>';
+                        }
+                        else {
+
+
+                                  output += '<tr><th scope="row">' + data[i].idEmpleado + '</th><td>' + data[i].Nombres + ' ' + data[i].Apellidos + '</td><td>' + data[i].cargo + '</td><td align="center"><input class="form-check-input position-static" type="radio" name="blankRadio' + cargo + '" id="blankRadio1" data-nombres="' + data[i].Nombres + ' ' + data[i].Apellidos +'" value="' + data[i].idEmpleado + '"></td></tr>';
+                        }
+
+
+                        }
+                        output += '</table>';
+
+                        $('#resultado'+cargo).html(output);
+
+                    }
+                });
+
+            });
+    proyecto(@ViewBag.idSolicitud);
+    
+
+        $(".btnCopiar").click(function () {
+            var cargo = $(this).data("cargo");
+            var bool = window.confirm("¿Seguro de Asignar Recurso ?");
+            if (bool) {
+                var nombres = $("input[name=blankRadio" + cargo + "]:checked").data("nombres");
+                var codigo = $("input[name=blankRadio" + cargo + "]:checked").val();
+                $("#nombre" + cargo).val(nombres);
+                $("#codigo" + cargo).val(codigo);
+
+                //alert("se asigno correctamente");
+            } else {
+                alert("canceló la asignación de recurso");
+            }
+
+
+
+               // alert(nombres);
+                //alert($(this).data('codigo'));
+
+        });
+
+
+
+        $(".btnBuscaActvidades").click(function () {
+            var descrip = $("#txtActividad").val();
+
+            var entidad = {};
+            entidad.Descripcion = descrip;
+
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/BuscarActividades',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+
+                        output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
+                        output += '<thead><tr><th>Código</th><th>Descripcion</th><th>Opciones</th></thead><tbody>';
+                        console.log("datax", data);
+                        for (var i in data) {
+                            //console.log(data.codProyecto);
+                            if (data[i].idActividad == 0) {
+                                output += '<tr><td colspan="4" align="center">No hay coincidencias</td></tr>';
+                            }
+                            else {
+
+
+                                output += '<tr><th scope="row">' + data[i].idActividad + '</th><td>' + data[i].Descripcion + '</td><td align="center"><input class="form-check-input position-static" type="radio" name="blankRadioaActividad" id="blankRadioActividad" data-desc="' + data[i].Descripcion + '"  value="' + data[i].idActividad + '"></td></tr>';
+                            }
+
+
+                        }
+                        output += '</table>';
+
+                        $('#resultadActividades').html(output);
+
+                    }
+
+
+
+
+                });
+
+        });
+
+        $(".btnProgramador").click(function () {
+            var codigo = $("input[name=blankRadioProgramador]:checked").val();
+
+            var entidad = {};
+            entidad.idProgramador = codigo;
+            entidad.idProyecto = @ViewBag.idSolicitud;
+            var bool = window.confirm("¿Seguro de seleccionar Programador ?");
+            if (bool) {
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/RecursoCRUD',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+
+
+                        llenarTablaProgramador();
+
+
+                    }
+                });
+            } else {
+
+                alert("Se canceló la selección del progamador");
+            }
+
+        });
+
+    $(".btnGrabarActividad").click(function () {
+            if($("#finActividad").val() != "" && $("#inicioActividad").val() != "") {
+                var entidad = {};
+                entidad.idActividad = $("#idActividad").val();
+                entidad.idProyecto = @ViewBag.idSolicitud;
+                entidad.fechaFin = $("#finActividad").val();
+                entidad.fechaInicio = $("#inicioActividad").val();
+                entidad.descripcion = $("#txtActividad").val();
+                entidad.porcentajeReal = $("#realActividad").val();
+                entidad.porcentajePlan = $("#planActividad").val();
+                entidad.estado = 'Nuevo';
+                console.log(entidad);
+
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/ActividadCRUD',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+                        console.log("Actividad", data);
+
+                        llenarTablaActividades();
+
+
+                    }
+                });
+            } else {
+                alert("Debe completar los datos de la actividad");
+                return;
+            }
+
+        });
+
+        function llenarTablaProgramador() {
+            var entidad = {};
+            entidad.codProyecto = @ViewBag.idSolicitud;
+            $.ajax({
+                data: entidad,
+                type: 'POST',
+                url: 'http://localhost:9586/api/Asignar/ListadoProgramador',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
+                    output += '<thead><tr><th>Cargo</th><th>Nombres</th><th>Apellidos</th><th>Operaciones</th></tr></thead><tbody>';
+
+
+                    console.log("datax", data);
+                    for (var i in data) {
+
+                        output += '<tr><td>' + data[i].cargo + '</td><td>' + data[i].Nombres + '</td><td>' +  data[i].Apellidos +  '</td><td align="center"><a href="retirar/index/' + data[i].codEmpleado + '">Retirar</a></td></tr>';
+                        //console.log(data[i].DEPA_DESCRIPCION);
+
+                    }
+                    $('#tablaProgramador').html(output);
+
+
+
+
+                }
+            });
+
+
+
+        }
+
+     function llenarTablaSonar() {
+            var entidad = {};
+            entidad.codProyecto = @ViewBag.idSolicitud;
+            $.ajax({
+                data: entidad,
+                type: 'POST',
+                url: 'http://localhost:9000/api/issues/search',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
+                    output += '<thead><tr><th>Actividad</th><th>Porcentaje Planificado</th><th>Porcentaje Real</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+
+
+                    console.log("dataactivda", data);
+                    if (data[0].idActividad != 0) {
+                    for (var i in data) {
+
+                        var fecha_inicio = new Date(data[i].fechaInicio);
+                        var fecha_fin = new Date(data[i].fechaFin);
+                        output += '<tr><td>' + data[i].descripcion + '</td><td>' + data[i].porcentajePlan + '%</td><td>' + data[i].porcentajeReal + '%</td><td>' + data[i].estado + '</td><td align="center"><button type="button" class="btn btn-primary editActividad  btn-sm" data-toggle="modal" data-target="#exampleModal4" data-id="' + data[i].idActividad + '" data-desc="' + data[i].descripcion + '" data-inicio="' + fecha_inicio.toLocaleDateString() + '" data-fin="' + fecha_fin.toLocaleDateString() + '" data-plan="' + data[i].porcentajePlan + '" data-real="' + data[i].porcentajeReal +'"> Gestionar</button></td></tr>';
+                        //console.log(data[i].DEPA_DESCRIPCION);
+
+                        }
+                    }
+                    $('#tablaSonar').html(output);
+
+
+
+
+                }
+            });
+
+
+
+        }
+
+        function llenarTablaActividades() {
+            var entidad = {};
+            entidad.codProyecto = @ViewBag.idSolicitud;
+            $.ajax({
+                data: entidad,
+                type: 'POST',
+                url: 'http://localhost:9586/api/Asignar/ListadoActividad',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
+                    output += '<thead><tr><th>Actividad</th><th>Porcentaje Planificado</th><th>Porcentaje Real</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+
+
+                    console.log("dataactivda", data);
+                    if (data[0].idActividad != 0) {
+                    for (var i in data) {
+
+                        var fecha_inicio = new Date(data[i].fechaInicio);
+                        var fecha_fin = new Date(data[i].fechaFin);
+                        output += '<tr><td>' + data[i].descripcion + '</td><td>' + data[i].porcentajePlan + '%</td><td>' + data[i].porcentajeReal + '%</td><td>' + data[i].estado + '</td><td align="center"><button type="button" class="btn btn-primary editActividad  btn-sm" data-toggle="modal" data-target="#exampleModal4" data-id="' + data[i].idActividad + '" data-desc="' + data[i].descripcion + '" data-inicio="' + fecha_inicio.toLocaleDateString() + '" data-fin="' + fecha_fin.toLocaleDateString() + '" data-plan="' + data[i].porcentajePlan + '" data-real="' + data[i].porcentajeReal +'"> Gestionar</button></td></tr>';
+                        //console.log(data[i].DEPA_DESCRIPCION);
+
+                        }
+                    }
+                    $('#tablaActividades').html(output);
+
+
+
+
+                }
+            });
+
+
+
+        }
+
+
+        
+        llenarTablaProgramador();
+    llenarTablaActividades();
+    llenarTablaSonar();
+
+    $('.editActividad').click(function (e) {
+        var m = $(this).data("id");
+        $("#idActividad").val(m);
+        $("#txtActividad").val($(this).data("desc"));
+        $("#inicioActividad").val($(this).data("inicio"));
+        $("#finActividad").val($(this).data("fin"));
+        $("#planActividad").val($(this).data("plan"));
+        $("#realActividad").val($(this).data("real"));
+
+        var bool = window.confirm("Seguro de editar la actividad " + $(this).data("desc")+ "?");
+            if (bool) {
+
+              //  alert("se eliminó correctamente");
+            } else {
+                //alert("canceló la solicitud");
+            }
+
+        });
+
+        $(".btnGrabar").click(function () {
+            mensaje= $(this).data("mensaje");
+            var inps = $("#codigoInspector").val();
+            var coor = $("#codigoCoordinador").val();
+
+            if (inps == '' || coor == ''){
+                window.confirm("Falta asignar Coordinador o Inspector");
+                return;
+
+        }
+            entidad = {};
+            entidad.idProyecto =@ViewBag.idSolicitud;
+            entidad.idInspector = inps;
+            entidad.idCoordinador = coor;
+            entidad.estadoSolicitud = $(this).data("estado");
+            entidad.Observacion = 'xxxx';
+            entidad.fechaAprobacion = "2018-07-05";
+            console.log(entidad);
+            var bool = window.confirm("Esta seguro de " + mensaje+" la solicitud?");
+            if (bool && mensaje != "Rechazar") {
+                $.ajax({
+                    "data": entidad,
+                    "url": 'http://localhost:9586/api/Asignar/SolicitudCRUD',
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "async": false,
+                    success: function (data) {
+                        console.log("Solicitud", data);
+
+                    }
+                });
+                alert("se " + mensaje + " la solicitud correctamente");
+
+                window.location.href = 'http://localhost:4356/';
+            } else {
+                // alert("canceló la solicitud");
+            }
+
+
+        });
+</script>
 

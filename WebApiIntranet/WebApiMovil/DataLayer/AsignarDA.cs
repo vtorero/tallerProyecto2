@@ -76,6 +76,7 @@ namespace WebApiMovil.DataLayer
                     using (SqlCommand command = new SqlCommand("SP_INSERT_ACTIVIDAD", conection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@id_actividad", entidad.idActividad);
                         command.Parameters.AddWithValue("@id_proyecto", entidad.idProyecto);
                         command.Parameters.AddWithValue("@fechaInicio", entidad.fechaInicio);
                         command.Parameters.AddWithValue("@fechaFin", entidad.fechaFin);
@@ -322,6 +323,7 @@ namespace WebApiMovil.DataLayer
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@descripcion", entidad.nombreProyecto);
+                        command.Parameters.AddWithValue("@idSolicitud", entidad.idSolicitud);
 
 
 
@@ -345,7 +347,10 @@ namespace WebApiMovil.DataLayer
                                         solicitud.jefeProyecto = dr.GetString(dr.GetOrdinal("jefeProyecto"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("fechaAprobacion")))
                                         solicitud.fechaAprobacion = dr.GetDateTime(dr.GetOrdinal("fechaAprobacion"));
-
+                                    if (!dr.IsDBNull(dr.GetOrdinal("coordinador")))
+                                        solicitud.coordinador = dr.GetString(dr.GetOrdinal("coordinador"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("inspector")))
+                                        solicitud.inspector = dr.GetString(dr.GetOrdinal("inspector"));
                                     Lista.Add(solicitud);
                                 }
                             }
