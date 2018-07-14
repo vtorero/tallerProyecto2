@@ -4,12 +4,17 @@ var tblAsignacion = null;
 var tblAccesorioDev = null;
 $(document).ready(function () {
     llenarTabla2();
-    llenarSolicitudes();
+    llenarSolicitudes('');
 });
 
 $("#btnAgregar").click(function () {
     var url = $("#AgregarEditar").val();
     window.location.href = url + '?id=0&accion=0';
+});
+
+$("#btnBuscarSolicitud").click(function () {
+    var texto = $("#txtSolicitud").val();
+    llenarSolicitudes(texto);
 });
 
 
@@ -63,9 +68,10 @@ $("#btnBuscar").click(function () {
      
 });
 
-function llenarSolicitudes() {
+function llenarSolicitudes(d) {
+    var criterio = d;
     var entidad = {};
-    entidad.nombreProyecto = '';
+    entidad.nombreProyecto = d;
     
     $.ajax({
         "type": 'POST',
@@ -85,7 +91,7 @@ function llenarSolicitudes() {
                 total++;
                 
                 var fecha_aprobacion = new Date(data[i].fechaAprobacion);
-                output += '<tr><th scope="row">' + data[i].idProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_aprobacion.toLocaleDateString() + '</td><td>' + data[i].estadoSolicitud + '</td><td><a href="inspeccion/index/' + data[i].idSolicitud + '">Gestionar</a></td></tr>';
+                output += '<tr><th scope="row">' + data[i].idProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_aprobacion.toLocaleDateString() + '</td><td>' + data[i].estadoSolicitud + '</td><td><a href="/inspeccion/index/' + data[i].idSolicitud + '">Gestionar</a></td></tr>';
                 //console.log(data[i].DEPA_DESCRIPCION);
 
             }

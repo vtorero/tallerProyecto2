@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AsignarController.cs" />
     <Compile Include="Controllers\gestionarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\inspeccionController.cs" />
     <Compile Include="Controllers\solicitudController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1113,6 +1114,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\solicitud\solicitud.cshtml" />
     <Content Include="Views\gestionar\Index.cshtml" />
+    <Content Include="Views\inspeccion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Adjuntos\" />
