@@ -487,5 +487,23 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-
+----
+USE [inspeccion]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_BUSCA_SOLICITUDES]    Script Date: 14/07/2018 02:23:19 a.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[SP_BUSCA_SOLICITUDES]
+@descripcion varchar(100) =null
+AS BEGIN
+ BEGIN
+ if(@descripcion is not null)
+ SELECT * FROM solicitud s,proyecto p where s.idProyecto=p.codProyecto and p.nombreProyecto like '%'+ @descripcion + '%'
+ else
+ SELECT * FROM solicitud s,proyecto p where s.idProyecto=p.codProyecto
+ end
+END
+---------
 http://localhost:9000/api/issues/search
