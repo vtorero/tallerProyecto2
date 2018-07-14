@@ -147,6 +147,7 @@
             <div class="card-body">
 
                 <div id="tablaSonar"></div>
+                <iframe src="http://localhost:9000/dashboard?id=Proyecto1" height="600" width="100%"></iframe>
 
             </div>
         </div>
@@ -552,17 +553,18 @@
 
 
 
-        }
+    }
+
+
 
      function llenarTablaSonar() {
             var entidad = {};
             entidad.codProyecto = @ViewBag.idSolicitud;
             $.ajax({
-                data: entidad,
-                type: 'POST',
                 url: 'http://localhost:9000/api/issues/search',
-                dataType: 'json',
                 async: false,
+                "cache": false,
+                dataType: 'json',
                 success: function (data) {
                     output = ' <table id="example2" class="table table-bordered table-striped" width="100%">';
                     output += '<thead><tr><th>Actividad</th><th>Porcentaje Planificado</th><th>Porcentaje Real</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
