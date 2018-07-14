@@ -9,8 +9,9 @@ namespace Celular.Controllers
     public class inspeccionController : Controller
     {
         // GET: inspeccion
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            ViewBag.idSolicitud = id;
             return View();
         }
     }
